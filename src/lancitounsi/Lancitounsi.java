@@ -28,7 +28,7 @@ public class Lancitounsi {
          ServiceContrat ca= new ServiceContrat();
           
        // AJOUT CATÉGORIE 
-         /*
+         
          catégorie res=new catégorie("yassIIII");
 
         
@@ -45,6 +45,32 @@ public class Lancitounsi {
        // DELETE CONTRAAT
           ca.Deletecontrat(4473);
 
+        
+        
+        
+        
+         // Projet test
+        MaConnexion instance = MaConnexion.getInstance();
+        Connection cnx = instance.getCnx();
+        System.out.println("connextion..."+cnx);
+        
+        Projet p=new Projet(2,"malek","aaaaaaaaaaaaaaaa",10,102,"pending");
+        ServiceProjet s =new ServiceProjet();
+         s.createProjet(p);
+        s.updateProjet(10, "malik", "sdsqjdksghqdsqgd", 20, 400);
+       Projet paa= s.detailProjet(5);
+        s.deleteProjet(33);
+        System.out.println(s.readProjets());
+        System.out.println("detail : "+s.detailProjet(33));
+        
+        //Proposition test
+        
+        Proposition prop=new Proposition(paa,7,100,6,"testtesttesttestaaa ","pending");
+        ServiceProposition sprop=new ServiceProposition();
+        sprop.createProposition(prop);
+        
+        
+        System.out.println("listBy : "+s.MesProjetsByStatut(2,"pending"));
         
         
            catégorie upp=new catégorie(4457,"sam");
@@ -68,7 +94,7 @@ public class Lancitounsi {
         contrats = ca.readcontrats(); 
         System.out.println(contrats.toString()); 
        
-       */
+       
           
          
         /*
@@ -126,7 +152,9 @@ public class Lancitounsi {
         System.out.println(ct);
               
         
-       
+        System.out.println("Verif Prop : "+s.readProjetsByCritere("id", "DESC"));
+        
+        // end Malek
     }
     
 }
