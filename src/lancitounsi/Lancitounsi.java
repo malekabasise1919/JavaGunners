@@ -23,6 +23,10 @@ public class Lancitounsi {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        
+        
+        
+        
          // Projet test
         MaConnexion instance = MaConnexion.getInstance();
         Connection cnx = instance.getCnx();
@@ -52,6 +56,8 @@ public class Lancitounsi {
         
         
         System.out.println("Verif Prop : "+s.readProjetsByCritere("id", "DESC"));
+        
+        // end Malek
     }
     
 }
