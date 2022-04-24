@@ -64,7 +64,6 @@ ServiceProjet sp =new ServiceProjet();
 
     @FXML
     private Pane pnlMenus;
-    @FXML
     private Pane pnlDetailP;
     
     @FXML
@@ -77,6 +76,8 @@ ServiceProjet sp =new ServiceProjet();
     private Parent parent;   
     @FXML
     private Label tt_pr;
+    @FXML
+    private Button bt_add_pr;
     
   
     
@@ -110,13 +111,7 @@ ServiceProjet sp =new ServiceProjet();
     }
     
     
-    
-    
-    
-  
- 
-       
-    
+     
 
 
 @FXML
@@ -145,5 +140,16 @@ ServiceProjet sp =new ServiceProjet();
          stage.setScene(scene);
          stage.show();
         }
+    }
+
+    @FXML
+    private void addProjet(ActionEvent actionEvent) throws IOException {
+        
+        Parent root = FXMLLoader.load(getClass().getResource("ajouterProjet.fxml"));
+         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+         
+         scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show();
     }
 }

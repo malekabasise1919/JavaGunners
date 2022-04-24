@@ -4,6 +4,7 @@
  */
 package home;
 
+import static home.ItemPropController.isNumeric;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,62 +17,87 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.Projet;
 import models.Proposition;
-import services.ServiceProposition;
+import services.ServiceProjet;
 
 /**
  * FXML Controller class
  *
  * @author malek
  */
-public class ItemPropController implements Initializable {
-    
-    Projet projet;
+public class AjouterProjetController implements Initializable {
 
     @FXML
-    private TextField prix;
+    private Button btnOverview;
     @FXML
-    private TextField date;
+    private Button btnOrders;
+    @FXML
+    private Button btnCustomers;
+    @FXML
+    private Button btnMenus;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private Button btnSignout;
+    @FXML
+    private Pane pnlCustomer;
+    @FXML
+    private Pane pnlOrders;
+    @FXML
+    private Pane pnlMenus;
+    @FXML
+    private Pane pnlDetailP;
+    @FXML
+    private TextField nom;
+    @FXML
+    private TextField prix_min;
+    @FXML
+    private TextField prix_max;
     @FXML
     private TextArea desc;
     @FXML
     private Button btn;
     
-    int user_id;
+     int user_id;
     
      private Stage stage;
     private Scene scene;
     private Parent parent; 
     
-    ServiceProposition sprp = new ServiceProposition();
+    ServiceProjet spr = new ServiceProjet();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         // TODO
     }    
 
     @FXML
-    private void proposer(ActionEvent event) throws IOException {
+    private void handleClicks(ActionEvent event) {
+    }
+
+    @FXML
+    private void ajouter(ActionEvent event) throws IOException {
         
-        System.out.println("Projet**************"+projet);
+          
         
-        if(prix.getText().isEmpty() || date.getText().isEmpty() || desc.getText().isEmpty()){
+        if(nom.getText().isEmpty() || prix_min.getText().isEmpty() || prix_max.getText().isEmpty() ||desc.getText().isEmpty()){
               Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setTitle("Erreur");
             alert1.setHeaderText("Erreur!");
             alert1.setContentText("Veuillez remplir tout les champs ! ");
             alert1.show();
             
-        }else if(isNumeric(prix.getText())==false){
+        }else if(isNumeric(prix_min.getText())==false ||isNumeric(prix_max.getText())==false  ){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Erreur!");
@@ -79,21 +105,15 @@ public class ItemPropController implements Initializable {
             alert.show();
         }else
         
-        if(isNumeric(date.getText())==false){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Erreur!");
-            alert.setContentText("Periode doit etre un nombre !");
-            alert.show();
-        }else {
+       {
             
             
             System.out.println("okkk");
             
             user_id=4;
              
-            Proposition p = new Proposition(projet,user_id,Integer.parseInt(prix.getText()),Integer.parseInt(date.getText()),desc.getText(),"pending");
-            sprp.createProposition(p);
+            Projet p = new Projet(user_id,nom.getText(),desc.getText(),Integer.parseInt(prix_min.getText()),Integer.parseInt(prix_max.getText()),"pending");
+            spr.createProjet(p);
             
             
               Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -105,36 +125,6 @@ public class ItemPropController implements Initializable {
             
         }
     }
-    @FXML
-    public void getProjet(Projet p){
-        projet=p;
-        
-        
-    }
-    
-    public static boolean isNumeric(String string) {
-    int intValue;
-		
-    
-		
-    if(string == null || string.equals("")) {
-        
-        return false;
-    }
-    
-    try {
-        intValue = Integer.parseInt(string);
-        if(intValue <= 0){
-            return false ;
-        }else{
-         return true;
-        }
-        
-    } catch (NumberFormatException e) {
-        
-    }
-    return false;
-}
 
     
 }
