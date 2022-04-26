@@ -21,4 +21,5 @@ public interface IServiceReclamation {
     public void updateReclamation(Reclamation r);
     public List<Reclamation> RechercheByDescription(String desc);
     public List<Reclamation> TriParDescription();
+    public String CreateCaptchaValue();
 }
